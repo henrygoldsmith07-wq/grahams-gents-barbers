@@ -29,3 +29,22 @@ html.js-reveal [data-reveal].is-in{opacity:1;transform:none}
 .hero-parallax{transform:translate3d(calc(var(--px,0)*1px),calc(var(--py,0)*1px),0);transition:transform .25s cubic-bezier(.22,1,.36,1)}
 .basket-count.pop{animation:pop .3s cubic-bezier(.22,1,.36,1)}@keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.28)}100%{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){html.js-reveal [data-reveal]{transition:none;opacity:1;transform:none}.basket-count.pop{animation:none}.hero-parallax{transition:none}}
+
+/* ---- Vibrancy pass: oxblood, gold, barber-pole energy (reduced-motion safe) ---- */
+:root{--oxblood:#8a2f42;--oxblood-deep:#6e1f30;--gold:#b08d3e;--gold-light:#d5b665;--charcoal:#242d2e}
+.direction-hero{background:
+  radial-gradient(80% 75% at 88% 5%, #f0d9c9 0%, rgba(240,217,201,0) 55%),
+  radial-gradient(70% 60% at 4% 92%, #e3e7e0 0%, rgba(227,231,224,0) 60%),
+  linear-gradient(180deg,#f7f5f1,#efe8df)}
+.direction-copy h1{background:linear-gradient(100deg,#4a1a26,#8a2f42 55%,#6e1f30);-webkit-background-clip:text;background-clip:text;color:transparent}
+.btn-primary{background:linear-gradient(135deg,#9a3850,#6e1f30);box-shadow:0 12px 26px -12px rgba(138,47,66,.55)}
+.btn-primary:hover{background:linear-gradient(135deg,#ab425c,#5c1728)}
+.direction-visual{background:linear-gradient(180deg,#efe4dc,#e6d7ca);border-radius:18px;border:1px solid #dcc6b6}
+.service-choice button{background:#fff;border:2px solid #d8c0ae;color:#4a1a26;font-weight:650}
+.service-choice button[aria-pressed=true]{background:linear-gradient(135deg,#8a2f42,#6e1f30);color:#fff;border-color:#6e1f30;box-shadow:0 8px 20px -10px rgba(110,31,48,.5)}
+.service-choice button:hover:not([aria-pressed=true]){border-color:#b08d3e}
+.ribbon{border-left:6px solid;border-image:linear-gradient(180deg,#8a2f42,#b08d3e,#8a2f42) 1}
+.section-head h2{background:linear-gradient(100deg,#4a1a26,#8a2f42 55%,#b08d3e);-webkit-background-clip:text;background-clip:text;color:transparent}
+.planning{background:linear-gradient(160deg,#273438,#1a2325)}
+.planning .button{background:linear-gradient(135deg,#9a3850,#6e1f30)}
+.planning .button:hover{background:linear-gradient(135deg,#ab425c,#5c1728)}
