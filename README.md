@@ -47,3 +47,6 @@ Associated the preferred-time hint with its field via `aria-describedby`, and ma
 
 ## Tests — 16 November 2026
 Added `tests/structure.test.js`, a dependency-free contract suite run with `node tests/structure.test.js`. It checks the single h1 and unique IDs, local asset and CSS references, JSON-LD and opening hours, strict CSP, script order, radiogroup semantics, field labels and hint association, safe external links, the manifest name, the pre-launch indexing block and absence of the removed legacy modules. All 12 checks pass; a deliberate mutation of the radiogroup role was caught by the suite.
+
+## Status and highlight polish — 16 November 2026
+The navigation observer now clears `aria-current` when no observed section is in view, instead of leaving the last section highlighted. The visit-status line writes only when its text actually changes (so the polite live region is not re-announced every minute) and re-renders when a hidden tab becomes visible again. Browser re-check: status stays correct and unchanged across a visibility event; no console errors. Scroll-driven highlight was not re-verified because this session's browser tool could not scroll the tab.
