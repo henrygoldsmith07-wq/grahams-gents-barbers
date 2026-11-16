@@ -75,3 +75,6 @@ Rules for features this page no longer has (gallery, booking, other brands, remo
 
 ## Clipboard fallback focus — 16 November 2026
 When the modern clipboard API is unavailable, the temporary textarea used by the copy fallback no longer strands keyboard focus on `<body>`; the invoking control regains focus. Verified by forcing the clipboard API to reject in the browser.
+
+## Nav highlight made verifiable — 16 November 2026
+The observer now calls a named `SiteUX.navHighlight` function, so the setting and clearing logic can be checked without relying on IntersectionObserver delivery, which this browser does not provide. Verified in the browser for visit, services, no target and re-selection.

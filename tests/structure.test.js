@@ -101,6 +101,22 @@ check('no third-party runtime assets or inline handlers', () => {
   assert.deepEqual(inline, []);
 });
 
+check('nav highlight has a callable clear path', () => {
+  const exp = read('experience.js'), ref = read('refinement.js');
+  assert.ok(/navHighlight\(visibleId\)/.test(exp));
+  assert.ok(/removeAttribute\('aria-current'\)/.test(exp));
+  assert.ok(/SiteUX\.navHighlight\(visible\?visible\.target\.id:null\)/.test(ref));
+});
+
+check('responsive and reduced-motion breakpoints are present', () => {
+  const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
+  const css = sheets.map(read).join('\n');
+  for (const bp of ['@media(max-width:800px)', '@media(max-width:440px)', '@media(prefers-reduced-motion:reduce)']) {
+    assert.ok(css.includes(bp), 'missing ' + bp);
+  }
+  assert.ok(/\.mobile\s*\{/.test(css));
+});
+
 check('theme colour matches the hero background', () => {
   const theme = (html.match(/name="theme-color" content="([^"]+)"/) || [])[1];
   const hero = (read('hero-background.css').match(/\.direction-hero\.type-grahams\{background:(#[0-9a-f]{6})/i) || [])[1];

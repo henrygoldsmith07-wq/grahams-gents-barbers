@@ -64,4 +64,7 @@ Removed style rules whose selectors referenced only class names present in neith
 The `execCommand` copy fallback now restores focus to the control that invoked it. Reproduced in the browser with `clipboard.writeText` forced to fail: focus previously fell to `<body>`; it now returns to the invoking button.
 
 ## Theme colour — 16 November 2026
-Aligned `theme-color` with the Graham's hero background (`#1d292c`) and added a check tying the two together. 18 contract checks pass.
+Aligned `theme-color` with the Graham's hero background (`#1d292c`) and added a check tying the two together.
+
+## Nav highlight made verifiable — 16 November 2026
+Moved the section-highlight update into `SiteUX.navHighlight(visibleId)` so the exact logic used by the IntersectionObserver can be exercised directly, since this browser never delivers observer callbacks. Browser verification: `visit` → `#visit`, `services` → only `#services`, `null` → no highlight, re-selecting `visit` → `#visit` again, with no console errors. Also added checks for the callable clear path and the responsive/reduced-motion breakpoints; 20 contract checks pass.
