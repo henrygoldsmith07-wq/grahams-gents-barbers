@@ -101,6 +101,13 @@ check('no third-party runtime assets or inline handlers', () => {
   assert.deepEqual(inline, []);
 });
 
+check('theme colour matches the hero background', () => {
+  const theme = (html.match(/name="theme-color" content="([^"]+)"/) || [])[1];
+  const hero = (read('hero-background.css').match(/\.direction-hero\.type-grahams\{background:(#[0-9a-f]{6})/i) || [])[1];
+  assert.ok(theme && hero);
+  assert.equal(theme.toLowerCase(), hero.toLowerCase());
+});
+
 check('every static class keeps a CSS rule', () => {
   const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
   const css = sheets.map(read).join('\n');

@@ -62,3 +62,6 @@ Removed style rules whose selectors referenced only class names present in neith
 
 ## Clipboard fallback focus — 16 November 2026
 The `execCommand` copy fallback now restores focus to the control that invoked it. Reproduced in the browser with `clipboard.writeText` forced to fail: focus previously fell to `<body>`; it now returns to the invoking button.
+
+## Theme colour — 16 November 2026
+Aligned `theme-color` with the Graham's hero background (`#1d292c`) and added a check tying the two together. 18 contract checks pass.
