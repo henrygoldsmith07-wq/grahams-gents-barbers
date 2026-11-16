@@ -38,3 +38,6 @@ Trimmed experience.js to the three behaviours this page uses: service selection,
 
 ## Dead files — 16 November 2026
 Removed four source files that no HTML, CSS or JavaScript in this repo referenced: `style.css`, `direction.css`, `visit-collection.css` and `visit-collection.js` (about 28 KB). Their live rules are already present in the loaded stylesheets. Generated and source assets, including `assets/share-source.html`, were kept.
+
+## Radiogroup for hero services — 16 November 2026
+The four mutually exclusive hero service buttons are now a labelled ARIA radiogroup with `aria-checked`, a single tab stop and Arrow/Home/End navigation; the selected styling and form sync are unchanged. Audited in the browser: radios expose the right names/states, arrow keys move selection and focus, and the selected button keeps its cream background. Hostile form input still renders as literal text.

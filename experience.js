@@ -7,10 +7,11 @@ window.SiteUX={
 };
 (function(){
 const service=document.querySelector('#service');
-function serviceState(value){document.querySelectorAll('[data-hero-service]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.heroService===value)));document.querySelectorAll('.services li').forEach(li=>li.classList.toggle('service-selected',li.querySelector('[data-service]')?.dataset.service===value));const description=document.querySelector('#service-copy');if(description)description.textContent=value+' selected for your visit note. The shop confirms options and price.';}
+function serviceState(value){const buttons=[...document.querySelectorAll('[data-hero-service]')];buttons.forEach(b=>{const on=b.dataset.heroService===value;b.setAttribute('aria-checked',String(on));b.tabIndex=on?0:-1;});document.querySelectorAll('.services li').forEach(li=>li.classList.toggle('service-selected',li.querySelector('[data-service]')?.dataset.service===value));const description=document.querySelector('#service-copy');if(description)description.textContent=value+' selected for your visit note. The shop confirms options and price.';}
 document.querySelectorAll('[data-hero-service]').forEach(b=>b.addEventListener('click',()=>{if(!service)return;service.value=b.dataset.heroService;service.dispatchEvent(new Event('input',{bubbles:true}));serviceState(service.value);}));
 document.querySelectorAll('[data-service]').forEach(a=>a.addEventListener('click',()=>{if(service){service.value=a.dataset.service;service.dispatchEvent(new Event('input',{bubbles:true}));serviceState(service.value);}}));
 if(service)service.addEventListener('change',()=>serviceState(service.value));
+const group=document.querySelector('.service-choice[role="radiogroup"]');if(group)group.addEventListener('keydown',e=>{const keys=['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Home','End'];if(!keys.includes(e.key))return;e.preventDefault();const buttons=[...group.querySelectorAll('[data-hero-service]')];const current=buttons.findIndex(b=>b.getAttribute('aria-checked')==='true');let next=current;if(e.key==='Home')next=0;else if(e.key==='End')next=buttons.length-1;else next=(current+(e.key==='ArrowRight'||e.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length;buttons[next].click();buttons[next].focus();});
 const status=document.querySelector('#visit-status');if(status){
  const hours={1:[540,1020],2:[540,1020],3:[540,1020],4:[540,1020],5:[540,1020],6:[540,780]};
  const fmt=m=>{const h=Math.floor(m/60);return(h%12||12)+(m%60?':'+String(m%60).padStart(2,'0'):'')+(h>=12?'pm':'am');};

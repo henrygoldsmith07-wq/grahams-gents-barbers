@@ -60,3 +60,6 @@ experience.js now contains only service selection, the visit-status clock and th
 
 ## Shared London clock — 16 November 2026
 Replaced the locale-string parsing used for "now in London" with `Intl.DateTimeFormat` parts, exposed one `SiteUX.iso()` for both scripts and loaded experience.js first so app.js can use it. Date limits refresh on input focus and the 120-day ceiling is recomputed at submit, avoiding stale limits on a long-open tab. No layout or business-rule change.
+
+## Radiogroup for hero services — 16 November 2026
+The hero service choices now use radiogroup/radio semantics with roving tabindex and arrow-key selection instead of four independent toggle buttons. Visual selected states were re-verified in the browser after updating the `aria-checked` selectors in site.css, refinement.css and hero-background.css. No change to form values, copy or business facts.
