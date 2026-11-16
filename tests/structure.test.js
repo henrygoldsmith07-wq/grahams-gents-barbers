@@ -153,6 +153,57 @@ check('not-found page keeps the site style and a safe fallback', () => {
   assert.ok(notFound.includes('tel:+442920763442'));
 });
 
+check('structured data matches visible hours and service names', () => {
+  const salon = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(m => JSON.parse(m[1])).find(b => b['@type'] === 'HairSalon');
+  const specs = salon.openingHoursSpecification;
+  assert.ok(specs.some(x => x.opens === '09:00' && x.closes === '17:00'));
+  assert.ok(specs.some(x => x.opens === '09:00' && x.closes === '13:00'));
+  assert.ok(html.includes('Monday–Friday 09:00–17:00 · Saturday 09:00–13:00'));
+  const names = salon.hasOfferCatalog.itemListElement.map(i => i.itemOffered.name);
+  assert.equal(names.length, 4);
+  for (const n of names) assert.ok(html.includes(n), 'service name absent from page: ' + n);
+});
+
+check('service links have distinct accessible names', () => {
+  const labels = [...html.matchAll(/data-service="[^"]+" aria-label="([^"]+)"/g)].map(m => m[1]);
+  assert.equal(labels.length, 4);
+  assert.equal(new Set(labels).size, 4);
+  assert.equal([...html.matchAll(/<a href="#plan"[^>]*>Ask about this<\/a>/g)].length, 4);
+});
+
+check('copy feedback is outside the result live region', () => {
+  assert.ok(html.includes('id="result" class="result" role="region"'));
+  const app = read('app.js');
+  assert.ok(app.includes("copyState.setAttribute('aria-live','polite')"));
+  assert.ok(app.includes("range.selectNodeContents(pre)"));
+});
+
+check('validation error is stable and associated with invalid fields', () => {
+  assert.ok(html.includes('<p id="visit-error" class="inline-error" role="alert" tabindex="-1"></p>'));
+  const app = read('app.js');
+  assert.ok(app.includes("field?.setAttribute('aria-describedby','visit-error')"));
+  assert.ok(app.includes("error.textContent=''"));
+  assert.ok(read('site.css').includes('.inline-error:empty{display:none}'));
+});
+
+check('metadata and icon use the final brand palette', () => {
+  const title = (html.match(/<title>([^<]+)<\/title>/) || [])[1];
+  assert.equal((html.match(/property="og:title" content="([^"]+)"/) || [])[1], title);
+  assert.equal((html.match(/name="twitter:title" content="([^"]+)"/) || [])[1], title);
+  const manifest = JSON.parse(read('site.webmanifest'));
+  assert.equal(manifest.theme_color, (html.match(/name="theme-color" content="([^"]+)"/) || [])[1]);
+  const icon = read('favicon.svg');
+  assert.ok(icon.includes('#1d292c') && icon.includes('#d6c49c'));
+});
+
+check('observer tracks all observed sections, not just changed entries', () => {
+  const ref = read('refinement.js');
+  assert.ok(ref.includes('const seen=new Map()'));
+  assert.ok(ref.includes('batch.forEach(e=>seen.set(e.target.id,e))'));
+  assert.ok(ref.includes('[...seen.values()].filter(e=>e.isIntersecting)'));
+});
+
 check('pre-launch indexing block is still in place', () => {
   assert.match(read('robots.txt'), /Disallow:\s*\//);
   assert.ok(html.includes('name="robots" content="noindex, nofollow"'));

@@ -71,10 +71,13 @@ The optional-time hint is now exposed to assistive tech through `aria-describedb
 The 404 fallback shares the live stylesheet, strict script policy and pre-launch indexing block, with a clear route home and the confirmed shop number. No new business claims or visual redesign.
 
 ## CSS prune — 16 November 2026
-Rules for features this page no longer has (gallery, booking, other brands, removed collection) were dropped from the four loaded stylesheets, about 14 KB. Before/after computed-style fingerprints of all 134 elements were identical, so the visible design is unchanged.
+Rules whose selectors referenced classes absent from both the HTML and the loaded JavaScript were dropped from the four loaded stylesheets, about 14 KB. Some inert grouped selectors remain because their class names appear in code or shared groups; the claim is a reduction, not a complete purge. Before/after computed-style fingerprints of all 134 elements were identical, so the visible design was unchanged.
 
 ## Clipboard fallback focus — 16 November 2026
 When the modern clipboard API is unavailable, the temporary textarea used by the copy fallback no longer strands keyboard focus on `<body>`; the invoking control regains focus. Verified by forcing the clipboard API to reject in the browser.
 
 ## Nav highlight made verifiable — 16 November 2026
 The observer now calls a named `SiteUX.navHighlight` function, so the setting and clearing logic can be checked without relying on IntersectionObserver delivery, which this browser does not provide. Verified in the browser for visit, services, no target and re-selection.
+
+## Parallel audit sweep — 16 November 2026
+A four-audit sweep improved keyboard access (menu focus, distinct link names, associated validation errors, copy status outside the live region), correctness (`MediaQueryList` fallback, full entry tracking in the section observer, initial service state, metadata/JSON-LD text parity) and details (favicon, manifest colours, 404 tokens, a single error red, no inert font axis, continuous h1 sizing at 800px). Failed clipboard copy now selects the note. The security audit found no weakness. All changes were verified in the browser and by a 134-element computed-style comparison with one intended difference.

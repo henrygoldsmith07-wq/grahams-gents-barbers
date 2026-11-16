@@ -9,7 +9,7 @@ Forms prepare a visible request or call note. Email links open the visitor's ema
 Confirm contact details, hours, service/menu content and accessibility needs with the owner. Replace the candidate GitHub Pages canonical/social URLs with the actual deployment URL. Search indexing is blocked by robots.txt pending owner launch approval. Remove that block and submit sitemap.xml only at approved launch. No real merchant checkout is configured.
 
 ## Security and privacy
-No third-party scripts, fonts, trackers or card handling. Executable JavaScript is self-hosted and CSP permits only self scripts. Form input is escaped or inserted as text. Gift shortlists use localStorage; visit details stay in the current tab.
+No third-party scripts, fonts, trackers or card handling. Executable JavaScript is self-hosted and CSP permits only self scripts. Form input is escaped or inserted as text. Visit details stay in the current tab; nothing is stored or sent.
 
 Prepared 15 November 2026.
 
@@ -68,3 +68,11 @@ Aligned `theme-color` with the Graham's hero background (`#1d292c`) and added a 
 
 ## Nav highlight made verifiable — 16 November 2026
 Moved the section-highlight update into `SiteUX.navHighlight(visibleId)` so the exact logic used by the IntersectionObserver can be exercised directly, since this browser never delivers observer callbacks. Browser verification: `visit` → `#visit`, `services` → only `#services`, `null` → no highlight, re-selecting `visit` → `#visit` again, with no console errors. Also added checks for the callable clear path and the responsive/reduced-motion breakpoints; 20 contract checks pass.
+
+## Parallel audit sweep — 16 November 2026
+Four independent read-only audits (security, accessibility/UX, design details, correctness/tests) fed one integrated change set:
+- Accessibility: distinct `aria-label`s for the four "Ask about this" links; opening the mobile menu focuses its first link; validation errors get a stable `aria-describedby`/`aria-invalid` pair and clear on edit; copy feedback moved out of the result live region into its own polite status.
+- Correctness: `MediaQueryList` listener falls back to `addListener`; the section observer tracks all observed entries rather than only changed ones; initial service state is applied on load; JSON-LD service name uses the same typographic apostrophe as the page; `og:title` matches the document title.
+- Details: favicon and web manifest use the final brand palette; the 404 page loads the token-finalising sheets; one error red; removed an inert Fraunces axis declaration; smoothed the h1 size across the 800px breakpoint.
+- Reliability: when clipboard copy fails, the note is actually selected and focused with an actionable message.
+The security audit found no remaining concrete weakness. Contract suite grew to **26 checks**. Browser verification: menu focus "Services", error shown/described/cleared, copy failure selects the note and keeps the button label stable, 404 accent `#65532f`. A 134-element before/after computed-style comparison found exactly one intentional difference — the newly selected initial service row.

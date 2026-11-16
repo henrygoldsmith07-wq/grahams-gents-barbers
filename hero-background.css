@@ -22,7 +22,7 @@
 @media(max-width:800px){
  .direction-hero.photo-hero,.direction-hero.type-hero{padding:56px 0 32px!important;min-height:0}
  .photo-hero .direction-layout,.type-hero .direction-layout{min-height:580px;align-items:center;display:flex}
- .direction-hero.photo-hero .direction-copy h1,.direction-hero.type-hero .direction-copy h1,body.studio .direction-hero.type-hero .direction-copy h1{font-size:clamp(48px,10.5vw,76px);max-width:13ch;line-height:1.06}
+ .direction-hero.photo-hero .direction-copy h1,.direction-hero.type-hero .direction-copy h1,body.studio .direction-hero.type-hero .direction-copy h1{font-size:clamp(48px,10.5vw,60px);max-width:13ch;line-height:1.06}
  .photo-hero .direction-copy .intro,.type-hero .direction-copy .intro{font-size:16px;line-height:1.75;max-width:38ch;margin-top:24px}
  .photo-hero::after{background:rgba(13,24,19,.72)}
  .photo-hero .hero-backdrop{object-position:60% center}
