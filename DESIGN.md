@@ -54,3 +54,6 @@ The earlier "final polish" scroll-reveal, parallax and shortlist-pop rules in si
 
 ## Second cleanup — 16 November 2026
 Removed code for features this page cannot use: Best Cut (`studio`) opening-hour variants in app.js and experience.js, and the gallery/dialog module in refinement.js. The nav section highlight, the only refinement.js behaviour that ran here, is untouched. Listed hours and visit-note validation are unchanged.
+
+## Third cleanup — 16 November 2026
+experience.js now contains only service selection, the visit-status clock and the copy fallback; card-rack and booking-form code for absent elements was removed along with the two `SiteUX` helpers only those paths used. The two HairSalon JSON-LD nodes were merged into one (`hasOfferCatalog` moved into the business node) and an empty `sameAs` removed. No business facts, offers or visual design changed.
