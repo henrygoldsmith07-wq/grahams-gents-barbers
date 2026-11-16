@@ -101,6 +101,16 @@ check('no third-party runtime assets or inline handlers', () => {
   assert.deepEqual(inline, []);
 });
 
+check('not-found page keeps the site style and a safe fallback', () => {
+  const notFound = read('404.html');
+  assert.match(notFound, /<h1>Page not found<\/h1>/);
+  assert.ok(notFound.includes('href="./"'));
+  assert.ok(notFound.includes('href="site.css"'));
+  assert.ok(notFound.includes('name="robots" content="noindex, nofollow"'));
+  assert.ok(notFound.includes("script-src 'self'"));
+  assert.ok(notFound.includes('tel:+442920763442'));
+});
+
 check('pre-launch indexing block is still in place', () => {
   assert.match(read('robots.txt'), /Disallow:\s*\//);
   assert.ok(html.includes('name="robots" content="noindex, nofollow"'));

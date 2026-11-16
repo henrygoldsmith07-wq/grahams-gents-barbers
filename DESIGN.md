@@ -66,3 +66,6 @@ The hero service choices now use radiogroup/radio semantics with roving tabindex
 
 ## Hint and live feedback — 16 November 2026
 The optional-time hint is now exposed to assistive tech through `aria-describedby`, and the service description announces selection changes. Nothing about the note text, business facts or layout changed.
+
+## Not-found page — 16 November 2026
+The 404 fallback shares the live stylesheet, strict script policy and pre-launch indexing block, with a clear route home and the confirmed shop number. No new business claims or visual redesign.
