@@ -26,7 +26,7 @@ if(date){
  [date,time,people,type].forEach(el=>{el.addEventListener('input',summary);el.addEventListener('change',summary);});summary();
 }
 const status=document.querySelector('#visit-status');if(status){
- const best=document.body.classList.contains('studio'),hours=best?{0:[600,960],1:[540,1080],2:[540,1080],3:[540,1080],4:[540,1080],5:[540,1080],6:[540,1080]}:{1:[540,1020],2:[540,1020],3:[540,1020],4:[540,1020],5:[540,1020],6:[540,780]};
+ const hours={1:[540,1020],2:[540,1020],3:[540,1020],4:[540,1020],5:[540,1020],6:[540,780]};
  const fmt=m=>{const h=Math.floor(m/60);return(h%12||12)+(m%60?':'+String(m%60).padStart(2,'0'):'')+(h>=12?'pm':'am');};
  function render(){const n=SiteUX.london(),d=n.getDay(),m=n.getHours()*60+n.getMinutes(),today=hours[d];if(today&&m>=today[0]&&m<today[1])status.textContent='Listed open until '+fmt(today[1]);else if(today&&m<today[0])status.textContent='Listed opening today: '+fmt(today[0]);else{for(let i=1;i<8;i++){const next=(d+i)%7;if(hours[next]){status.textContent='Next listed opening: '+(i===1?'tomorrow':['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][next])+' at '+fmt(hours[next][0]);break;}}}}
  render();setInterval(render,60000);

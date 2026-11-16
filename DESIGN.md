@@ -51,3 +51,6 @@ Henry requested photographs as backgrounds. Daisy and Honeybee now use the exist
 
 ## Dead-motion removal — 16 November 2026
 The earlier "final polish" scroll-reveal, parallax and shortlist-pop rules in site.css were never activated by any loaded script (no `js-reveal`/`is-in` classes are set). Removed those rules and the matching `data-reveal` attributes, plus inert card-rack logic copied from another site in direction.js. This completes the decorative-motion removal above rather than changing the visual design. Also preloaded Fraunces, used the business name in the web app manifest, made the once-a-minute visit-status announcement live to assistive tech, and replaced a hard-coded 2026 date in the weekday lookup with a direct array. No layout, content, flow or launch-setting change.
+
+## Second cleanup — 16 November 2026
+Removed code for features this page cannot use: Best Cut (`studio`) opening-hour variants in app.js and experience.js, and the gallery/dialog module in refinement.js. The nav section highlight, the only refinement.js behaviour that ran here, is untouched. Listed hours and visit-note validation are unchanged.

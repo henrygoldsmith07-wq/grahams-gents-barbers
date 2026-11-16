@@ -26,3 +26,6 @@ Brand-specific vibrancy layer appended to site.css: richer gradients and section
 
 ## Cleanup — 16 November 2026
 Removed the unused scroll-reveal/parallax/pop CSS from site.css and the matching `data-reveal` attributes: no script ever activated them, superseding the decorative-motion notes above. Removed inert card-rack logic from direction.js. Preloaded Fraunces alongside DM Sans, set the web app name to the business name, added `aria-live="polite"` to the once-a-minute visit-status text, and replaced a hard-coded 2026 date used to name weekdays with a direct lookup. No business details, flows or launch settings changed.
+
+## Second cleanup — 16 November 2026
+Removed branches that could never run on this site: the Best Cut `studio` hour variants in app.js and experience.js (the body class here is `heritage`), and the photo-gallery/dialog module in refinement.js (this page has no gallery). The nav highlight — the only part that ran — is unchanged. Visit-note validation and listed opening hours are identical.
