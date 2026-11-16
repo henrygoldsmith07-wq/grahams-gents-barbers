@@ -72,3 +72,6 @@ The 404 fallback shares the live stylesheet, strict script policy and pre-launch
 
 ## CSS prune — 16 November 2026
 Rules for features this page no longer has (gallery, booking, other brands, removed collection) were dropped from the four loaded stylesheets, about 14 KB. Before/after computed-style fingerprints of all 134 elements were identical, so the visible design is unchanged.
+
+## Clipboard fallback focus — 16 November 2026
+When the modern clipboard API is unavailable, the temporary textarea used by the copy fallback no longer strands keyboard focus on `<body>`; the invoking control regains focus. Verified by forcing the clipboard API to reject in the browser.

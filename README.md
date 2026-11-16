@@ -59,3 +59,6 @@ The contract suite now has 14 checks, adding assertions that the honeypot is hid
 
 ## CSS prune — 16 November 2026
 Removed style rules whose selectors referenced only class names present in neither the HTML nor the loaded JavaScript, saving about 14 KB (roughly a quarter of the loaded CSS). The loaded sheets were served side by side before and after: all 134 rendered elements had identical computed styles, with no console errors and working service selection, note building and menu behaviour. The contract suite now also checks that every static class keeps a CSS rule.
+
+## Clipboard fallback focus — 16 November 2026
+The `execCommand` copy fallback now restores focus to the control that invoked it. Reproduced in the browser with `clipboard.writeText` forced to fail: focus previously fell to `<body>`; it now returns to the invoking button.
