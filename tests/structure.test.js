@@ -83,6 +83,24 @@ check('web app manifest uses the business name', () => {
   assert.equal(JSON.parse(read('site.webmanifest')).name, "Graham's Gents Barbers");
 });
 
+check('honeypot field stays hidden from people and assistive tech', () => {
+  const honeypot = html.match(/<input id="website"[^>]*>/)[0];
+  const wrapper = html.match(/<div class="hp"[^>]*>/)[0];
+  assert.ok(/tabindex="-1"/.test(honeypot));
+  assert.ok(/aria-hidden="true"/.test(wrapper));
+  assert.ok(/<div class="hp"[^>]*>[\s\S]*?id="website"/.test(html));
+});
+
+check('no third-party runtime assets or inline handlers', () => {
+  const runtime = [
+    ...[...html.matchAll(/<script[^>]+src="(https?:[^"]+)"/g)].map(m => m[1]),
+    ...[...html.matchAll(/<link[^>]+rel="(?:stylesheet|preload|prefetch|modulepreload)"[^>]+href="(https?:[^"]+)"/g)].map(m => m[1])
+  ];
+  assert.deepEqual(runtime, []);
+  const inline = [...html.matchAll(/\s+on(?:click|error|load|submit|change|input|focus|mouseover)\s*=/gi)];
+  assert.deepEqual(inline, []);
+});
+
 check('pre-launch indexing block is still in place', () => {
   assert.match(read('robots.txt'), /Disallow:\s*\//);
   assert.ok(html.includes('name="robots" content="noindex, nofollow"'));

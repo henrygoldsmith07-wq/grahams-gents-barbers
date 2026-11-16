@@ -50,3 +50,6 @@ Added `tests/structure.test.js`, a dependency-free contract suite run with `node
 
 ## Status and highlight polish — 16 November 2026
 The navigation observer now clears `aria-current` when no observed section is in view, instead of leaving the last section highlighted. The visit-status line writes only when its text actually changes (so the polite live region is not re-announced every minute) and re-renders when a hidden tab becomes visible again. Browser re-check: status stays correct and unchanged across a visibility event; no console errors. Scroll-driven highlight was not re-verified because this session's browser tool could not scroll the tab.
+
+## Test suite extended — 16 November 2026
+The contract suite now has 14 checks, adding assertions that the honeypot is hidden from assistive tech and keyboard users, and that no third-party runtime asset or inline event handler is present. Two first-draft assertions were wrong (the `aria-hidden` sits on the wrapper, and `canonical` is a metadata link, not a runtime asset); both were corrected after the suite caught them rather than loosening the check.
