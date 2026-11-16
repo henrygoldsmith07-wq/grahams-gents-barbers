@@ -32,3 +32,6 @@ Removed branches that could never run on this site: the Best Cut `studio` hour v
 
 ## Third cleanup — 16 November 2026
 Trimmed experience.js to the three behaviours this page uses: service selection, the visit-status clock and the copy helper. Card-rack and booking-form code (and the `SiteUX.iso`/`pretty` helpers they alone used) had no matching elements here. Consolidated the two HairSalon JSON-LD blocks into one node with `hasOfferCatalog` and dropped the empty `sameAs` array; the business facts and offer list are unchanged.
+
+## Shared London clock — 16 November 2026
+`SiteUX.london()` now derives London wall-clock fields with `Intl.DateTimeFormat` rather than parsing a locale-formatted string, and `SiteUX.iso()` is shared with app.js. Loaded experience.js before app.js so the single helper is available at startup. The date input refreshes its min/max on focus, and submit recomputes the 120-day ceiling instead of trusting a stale attribute. Business rules and displayed hours unchanged.

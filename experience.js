@@ -1,6 +1,8 @@
 'use strict';
+const londonFormat=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
 window.SiteUX={
- london(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/London'}));},
+ london(){const p={};for(const x of londonFormat.formatToParts(new Date()))if(x.type!=='literal')p[x.type]=x.value;return new Date(+p.year,+p.month-1,+p.day,+p.hour,+p.minute);},
+ iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');},
  async copy(text){try{await navigator.clipboard.writeText(text);return true;}catch{const field=document.createElement('textarea');field.className='copy-buffer';field.value=text;field.setAttribute('aria-label','Request text to copy');document.body.append(field);field.select();let ok=false;try{ok=document.execCommand('copy');}catch{}field.remove();return ok;}}
 };
 (function(){
