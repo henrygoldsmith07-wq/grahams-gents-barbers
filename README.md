@@ -41,3 +41,6 @@ Removed four source files that no HTML, CSS or JavaScript in this repo reference
 
 ## Radiogroup for hero services — 16 November 2026
 The four mutually exclusive hero service buttons are now a labelled ARIA radiogroup with `aria-checked`, a single tab stop and Arrow/Home/End navigation; the selected styling and form sync are unchanged. Audited in the browser: radios expose the right names/states, arrow keys move selection and focus, and the selected button keeps its cream background. Hostile form input still renders as literal text.
+
+## Hint and live feedback — 16 November 2026
+Associated the preferred-time hint with its field via `aria-describedby`, and made the service-copy line a polite live region so keyboard and screen-reader users hear the selection change. Re-checked that a valid note still builds and that editing a field hides stale output.

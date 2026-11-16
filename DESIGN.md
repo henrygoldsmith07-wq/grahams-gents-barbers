@@ -63,3 +63,6 @@ Replaced the locale-string parsing used for "now in London" with `Intl.DateTimeF
 
 ## Radiogroup for hero services — 16 November 2026
 The hero service choices now use radiogroup/radio semantics with roving tabindex and arrow-key selection instead of four independent toggle buttons. Visual selected states were re-verified in the browser after updating the `aria-checked` selectors in site.css, refinement.css and hero-background.css. No change to form values, copy or business facts.
+
+## Hint and live feedback — 16 November 2026
+The optional-time hint is now exposed to assistive tech through `aria-describedby`, and the service description announces selection changes. Nothing about the note text, business facts or layout changed.
