@@ -55,4 +55,4 @@ The navigation observer now clears `aria-current` when no observed section is in
 The contract suite now has 14 checks, adding assertions that the honeypot is hidden from assistive tech and keyboard users, and that no third-party runtime asset or inline event handler is present. Two first-draft assertions were wrong (the `aria-hidden` sits on the wrapper, and `canonical` is a metadata link, not a runtime asset); both were corrected after the suite caught them rather than loosening the check.
 
 ## Not-found page — 16 November 2026
-`404.html` now uses the site stylesheet, the same self-only CSP and a `noindex` flag. It offers a styled route home and the shop's phone number instead of bare browser defaults. Browser-rendered with no console errors; the 15-check contract suite includes the fallback.
+`404.html` now uses the site stylesheet, the same self-only CSP and a `noindex` flag. It offers a styled route home and the shop's phone number instead of bare browser defaults. Browser-rendered with no console errors; the contract suite includes the fallback and now also checks that og-image.png is 1200×630 and sitemap.xml matches the canonical URL. 16 checks pass.

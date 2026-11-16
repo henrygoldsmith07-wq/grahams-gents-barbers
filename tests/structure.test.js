@@ -101,6 +101,16 @@ check('no third-party runtime assets or inline handlers', () => {
   assert.deepEqual(inline, []);
 });
 
+check('social image and sitemap match the declared URL', () => {
+  const png = fs.readFileSync(path.join(root, 'og-image.png'));
+  assert.equal(png.readUInt32BE(16), 1200);
+  assert.equal(png.readUInt32BE(20), 630);
+  const sitemap = read('sitemap.xml');
+  const canonical = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
+  assert.ok(canonical);
+  assert.ok(sitemap.includes('<loc>' + canonical + '</loc>'));
+});
+
 check('not-found page keeps the site style and a safe fallback', () => {
   const notFound = read('404.html');
   assert.match(notFound, /<h1>Page not found<\/h1>/);
