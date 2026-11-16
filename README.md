@@ -35,3 +35,6 @@ Trimmed experience.js to the three behaviours this page uses: service selection,
 
 ## Shared London clock — 16 November 2026
 `SiteUX.london()` now derives London wall-clock fields with `Intl.DateTimeFormat` rather than parsing a locale-formatted string, and `SiteUX.iso()` is shared with app.js. Loaded experience.js before app.js so the single helper is available at startup. The date input refreshes its min/max on focus, and submit recomputes the 120-day ceiling instead of trusting a stale attribute. Business rules and displayed hours unchanged.
+
+## Dead files — 16 November 2026
+Removed four source files that no HTML, CSS or JavaScript in this repo referenced: `style.css`, `direction.css`, `visit-collection.css` and `visit-collection.js` (about 28 KB). Their live rules are already present in the loaded stylesheets. Generated and source assets, including `assets/share-source.html`, were kept.
