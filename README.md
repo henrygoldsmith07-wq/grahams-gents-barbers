@@ -44,3 +44,6 @@ The four mutually exclusive hero service buttons are now a labelled ARIA radiogr
 
 ## Hint and live feedback — 16 November 2026
 Associated the preferred-time hint with its field via `aria-describedby`, and made the service-copy line a polite live region so keyboard and screen-reader users hear the selection change. Re-checked that a valid note still builds and that editing a field hides stale output.
+
+## Tests — 16 November 2026
+Added `tests/structure.test.js`, a dependency-free contract suite run with `node tests/structure.test.js`. It checks the single h1 and unique IDs, local asset and CSS references, JSON-LD and opening hours, strict CSP, script order, radiogroup semantics, field labels and hint association, safe external links, the manifest name, the pre-launch indexing block and absence of the removed legacy modules. All 12 checks pass; a deliberate mutation of the radiogroup role was caught by the suite.
