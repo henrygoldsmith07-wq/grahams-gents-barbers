@@ -23,3 +23,6 @@ Scroll-reveal section entrances (IntersectionObserver, reduced-motion safe), poi
 
 ## Vibrancy pass — 15 November 2026
 Brand-specific vibrancy layer appended to site.css: richer gradients and section depth, gradient headline/section headings, gradient primary buttons and glowing hover/selection states. All zero-dependency; respects prefers-reduced-motion; strict CSP unchanged; one h1 retained; no unverified claims added.
+
+## Cleanup — 16 November 2026
+Removed the unused scroll-reveal/parallax/pop CSS from site.css and the matching `data-reveal` attributes: no script ever activated them, superseding the decorative-motion notes above. Removed inert card-rack logic from direction.js. Preloaded Fraunces alongside DM Sans, set the web app name to the business name, added `aria-live="polite"` to the once-a-minute visit-status text, and replaced a hard-coded 2026 date used to name weekdays with a direct lookup. No business details, flows or launch settings changed.
