@@ -1,7 +1,5 @@
 /* Background-led heroes. Henry's direction, 16 November 2026. */
 .direction-hero.photo-hero,.direction-hero.type-hero{position:relative;isolation:isolate;overflow:hidden;padding:80px 0 56px!important;min-height:720px;background:#18251f!important;color:#fff9ee}
-.photo-hero .hero-backdrop{position:absolute;inset:0;z-index:-3;display:block;width:100%;height:100%;object-fit:cover;object-position:50% 48%;pointer-events:none}
-.photo-hero::after{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(13,24,19,.91) 0%,rgba(13,24,19,.82) 50%,rgba(13,24,19,.32) 80%,rgba(13,24,19,.16) 100%);pointer-events:none}
 .photo-hero .direction-layout,.type-hero .direction-layout{display:flex;align-items:center;min-height:540px;position:relative}
 .photo-hero .direction-copy,.type-hero .direction-copy{width:100%;max-width:600px;position:relative;z-index:1}
 .direction-hero.photo-hero .direction-copy h1,.direction-hero.type-hero .direction-copy h1,body.studio .direction-hero.type-hero .direction-copy h1{font-size:clamp(60px,6.5vw,100px);line-height:1.02;letter-spacing:-.045em;max-width:12ch;color:#fff9ee!important;-webkit-text-fill-color:#fff9ee!important}
@@ -11,8 +9,6 @@
 .direction-hero.photo-hero .direction-actions .btn-primary,.direction-hero.type-hero .direction-actions .btn-primary{background:#fff9ee!important;color:#18251f!important;border:1px solid #fff9ee!important}
 .direction-hero.photo-hero .direction-actions .btn-ghost,.direction-hero.type-hero .direction-actions .btn-ghost{background:rgba(13,24,19,.4)!important;color:#fff9ee!important;border:1px solid #d9ddd7!important}
 .photo-hero .direction-actions a:hover,.type-hero .direction-actions a:hover{filter:none;background:#e9e3d7!important;color:#18251f!important}
-.photo-hero .award-note{color:#fff9ee!important;border-color:#fff9ee!important}.photo-hero .award-note a{color:inherit}
-.photo-hero .hero-caption{position:relative;z-index:1;margin:24px 0 0 auto;max-width:44ch;font-size:12px;line-height:1.6;color:#fff9ee;background:rgba(13,24,19,.8);padding:12px 16px;align-self:end}
 .photo-hero :focus-visible,.type-hero :focus-visible{outline:3px solid #fff9ee;outline-offset:5px}
 .type-hero .hero-wordmark{position:absolute;z-index:-1;right:-1.5%;top:8%;margin:0;color:#bcc9c1;opacity:.13;pointer-events:none;user-select:none;font:400 clamp(180px,23vw,420px)/.9 'Fraunces',Georgia,serif;letter-spacing:-.07em;text-align:right}
 .type-hero .hero-wordmark span{display:block}

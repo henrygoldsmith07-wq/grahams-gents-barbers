@@ -101,6 +101,15 @@ check('no third-party runtime assets or inline handlers', () => {
   assert.deepEqual(inline, []);
 });
 
+check('every static class keeps a CSS rule', () => {
+  const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
+  const css = sheets.map(read).join('\n');
+  const classes = [...new Set([...html.matchAll(/class="([^"]+)"/g)].flatMap(m => m[1].split(/\s+/)).filter(Boolean))];
+  // 'heritage' is a body hook with no styling by design.
+  const missing = classes.filter(c => c !== 'heritage' && !new RegExp('\\.' + c + '\\b').test(css));
+  assert.deepEqual(missing, []);
+});
+
 check('social image and sitemap match the declared URL', () => {
   const png = fs.readFileSync(path.join(root, 'og-image.png'));
   assert.equal(png.readUInt32BE(16), 1200);

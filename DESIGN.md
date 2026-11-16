@@ -69,3 +69,6 @@ The optional-time hint is now exposed to assistive tech through `aria-describedb
 
 ## Not-found page — 16 November 2026
 The 404 fallback shares the live stylesheet, strict script policy and pre-launch indexing block, with a clear route home and the confirmed shop number. No new business claims or visual redesign.
+
+## CSS prune — 16 November 2026
+Rules for features this page no longer has (gallery, booking, other brands, removed collection) were dropped from the four loaded stylesheets, about 14 KB. Before/after computed-style fingerprints of all 134 elements were identical, so the visible design is unchanged.

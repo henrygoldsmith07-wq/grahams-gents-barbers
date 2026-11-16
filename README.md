@@ -56,3 +56,6 @@ The contract suite now has 14 checks, adding assertions that the honeypot is hid
 
 ## Not-found page — 16 November 2026
 `404.html` now uses the site stylesheet, the same self-only CSP and a `noindex` flag. It offers a styled route home and the shop's phone number instead of bare browser defaults. Browser-rendered with no console errors; the contract suite includes the fallback and now also checks that og-image.png is 1200×630 and sitemap.xml matches the canonical URL. 16 checks pass.
+
+## CSS prune — 16 November 2026
+Removed style rules whose selectors referenced only class names present in neither the HTML nor the loaded JavaScript, saving about 14 KB (roughly a quarter of the loaded CSS). The loaded sheets were served side by side before and after: all 134 rendered elements had identical computed styles, with no console errors and working service selection, note building and menu behaviour. The contract suite now also checks that every static class keeps a CSS rule.
