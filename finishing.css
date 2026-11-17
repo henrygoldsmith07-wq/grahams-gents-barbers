@@ -43,7 +43,7 @@ details p{line-height:1.8}.hint,.br-meta{font-size:14px;line-height:1.7}
  .viewer-controls{gap:8px}.viewer-controls button{padding:12px}
  body{padding-bottom:calc(88px + env(safe-area-inset-bottom))}
 }
-@media(max-width:360px){.photo-grid{columns:1}.direction-actions a{width:100%}}
+@media(max-width:360px){.photo-grid{columns:1}.direction-actions a{width:100%}.planning .split{grid-template-columns:minmax(0,1fr)}.planning form{padding:16px}input,select,textarea{max-width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
 
 body{--paper:var(--base);--ink:var(--text);--muted:var(--secondary);--line:var(--rule)}header.top,.direction-hero{--text:inherit;--secondary:inherit;--accent:inherit;--rule:inherit;--base:inherit;--surface:inherit}.studio header.top{--accent:inherit}.top .nav-toggle{color:var(--text)!important;border-color:var(--secondary)}.mobile .button{background:var(--accent)!important}.mobile .button.secondary{background:transparent!important}.services li h3{grid-column:2;font-size:clamp(23px,2.2vw,32px);margin:0}.services li a{grid-column:3;margin-top:0}.services li::before{grid-column:1;grid-row:1}.services li a{grid-row:1}@media(max-width:800px){.services li h3{font-size:25px}.services li a{grid-column:2;grid-row:2}.services li{grid-template-rows:auto auto}.studio .top .brand{font-family:var(--body);font-size:24px;font-weight:500}}

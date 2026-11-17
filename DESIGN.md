@@ -81,3 +81,6 @@ The observer now calls a named `SiteUX.navHighlight` function, so the setting an
 
 ## Parallel audit sweep — 16 November 2026
 A four-audit sweep improved keyboard access (menu focus, distinct link names, associated validation errors, copy status outside the live region), correctness (`MediaQueryList` fallback, full entry tracking in the section observer, initial service state, metadata/JSON-LD text parity) and details (favicon, manifest colours, 404 tokens, a single error red, no inert font axis, continuous h1 sizing at 800px). Failed clipboard copy now selects the note. The security audit found no weakness. All changes were verified in the browser and by a 134-element computed-style comparison with one intended difference.
+
+## Browser verification — 17 November 2026
+Lighthouse: accessibility 1.0, best practices 1.0, SEO 1.0, no failures. Real IntersectionObserver callbacks verified the nav highlight on `#visit`, `#services` and back to the hero. Service-link names include the visible text for axe parity. A ≤360px rule stops the form column overflowing a 215px viewport.
