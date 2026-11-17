@@ -111,10 +111,30 @@ check('nav highlight has a callable clear path', () => {
 check('responsive and reduced-motion breakpoints are present', () => {
   const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
   const css = sheets.map(read).join('\n');
-  for (const bp of ['@media(max-width:800px)', '@media(max-width:440px)', '@media(prefers-reduced-motion:reduce)']) {
+  for (const bp of ['@media(max-width:800px)', '@media(max-width:360px)', '@media(prefers-reduced-motion:reduce)']) {
     assert.ok(css.includes(bp), 'missing ' + bp);
   }
+  // The narrow-phone fix constrains the form grid, not a dead brand selector.
+  assert.ok(css.includes('.planning .split{grid-template-columns:minmax(0,1fr)}'), 'missing narrow form grid rule');
   assert.ok(/\.mobile\s*\{/.test(css));
+});
+
+check('stylesheets define no class tokens unused by the page', () => {
+  const sheets = [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m => m[1]);
+  const css = sheets.map(read).join('\n')
+    .replace(/\/\*[\s\S]*?\*\//g, '')
+    .replace(/url\([^)]*\)/g, '')
+    .replace(/'[^']*'/g, "''")
+    .replace(/"[^"]*"/g, '""');
+  const sources = [html, read('404.html'),
+    ...['app.js', 'experience.js', 'refinement.js', 'direction.js'].map(read)].join('\n');
+  const live = new Set();
+  for (const m of sources.matchAll(/class="([^"]*)"/g)) m[1].split(/\s+/).forEach(c => c && live.add(c));
+  for (const m of sources.matchAll(/className\s*=\s*['"]([^'"]+)['"]/g)) m[1].split(/\s+/).forEach(c => c && live.add(c));
+  for (const m of sources.matchAll(/classList\.(?:add|remove|toggle)\(['"]([^'"]+)['"]/g)) live.add(m[1]);
+  const tokens = new Set([...css.matchAll(/\.(-?[_a-zA-Z][\w-]*)/g)].map(m => m[1]));
+  const unused = [...tokens].filter(t => !live.has(t)).sort();
+  assert.deepEqual(unused, []);
 });
 
 check('theme colour matches the hero background', () => {
@@ -234,6 +254,22 @@ check('removed legacy modules are not referenced', () => {
     'app.js', 'direction.js', 'experience.js', 'refinement.js'].map(read)].join('\n');
   for (const dead of ['style.css', 'direction.css', 'visit-collection.css', 'visit-collection.js']) {
     assert.ok(!sources.includes(dead), 'stale reference to ' + dead);
+  }
+});
+
+// Source-level guards for behaviour the static markup checks cannot see. These catch
+// accidental deletion of a guard, though they are not a substitute for a runtime test.
+check('interactive guards survive refactors', () => {
+  const guards = [
+    ['app.js', "#website').value", 'honeypot short-circuit'],
+    ['app.js', 'chosen.getDay()===0', 'Sunday guard'],
+    ['app.js', 'minutes<=now.getHours()*60+now.getMinutes()', 'past-time guard'],
+    ['app.js', 'result.focus()', 'focus the completed note'],
+    ['experience.js', 'keys.includes(e.key)', 'radiogroup arrow/Home/End keys'],
+    ['direction.js', 'closeMenu(false)', 'nav links hand focus to the target section']
+  ];
+  for (const [file, needle, label] of guards) {
+    assert.ok(read(file).includes(needle), 'missing ' + label + ' in ' + file);
   }
 });
 

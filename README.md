@@ -3,7 +3,7 @@
 Independent zero-dependency static site for Henry Goldsmith. Open index.html via any static server. No build or paid services required.
 
 ## Functional scope
-Forms prepare a visible request or call note. Email links open the visitor's email app; no message is automatically sent. A reference is local, not a server booking. No payments, confirmed bookings, delivery promises or invented prices.
+Forms prepare a visible visit note to read or copy on a call. Phone links open the visitor's dialler; no message is automatically sent. A reference is local, not a server booking. No payments, confirmed bookings, delivery promises or invented prices.
 
 ## Before owner launch
 Confirm contact details, hours, service/menu content and accessibility needs with the owner. Replace the candidate GitHub Pages canonical/social URLs with the actual deployment URL. Search indexing is blocked by robots.txt pending owner launch approval. Remove that block and submit sitemap.xml only at approved launch. No real merchant checkout is configured.
@@ -82,3 +82,12 @@ Lighthouse on the local build scored 1.0 accessibility, 1.0 best practices and 1
 
 ## Social metadata parity — 17 November 2026
 Added explicit `twitter:image` and `twitter:image:alt` matching the Open Graph values, completing the card parity declared by `twitter:card`. The contract suite now has 28 checks and asserts that parity.
+
+## Dead CSS follow-up — 17 November 2026
+Removed a further ~8.3 KB (21%) of stylesheet rules whose selectors only referenced classes from other brands or templates absent from this page (`.jiro-*`, `.coffee-*`, `.photo-hero`, `.studio`, `.address-panel`, and similar), including the dead ≤440px breakpoint and empty media blocks. Verified inert by serving original and pruned copies side by side and comparing computed styles for 176 elements at 1905px: zero differences. The contract suite now checks the real ≤360px form-grid rule instead of the dead one, and fails if a CSS class token unused by the page is reintroduced. Corrected the scope line above (phone links, not email links). No business details or launch settings changed.
+
+## Mobile menu focus and guard tests — 17 November 2026
+An independent review found that activating a mobile nav link hid the menu while focus was still on the link, dropping focus to `<body>`; the page scrolled to the section but keyboard users lost their place. Nav links now hand focus to the target section (`tabindex="-1"` and `preventScroll`) while Escape and outside clicks still return focus to the Menu button. Added source guards for six behaviours the static markup checks could not see (honeypot short-circuit, Sunday and past-time guards, result focus, radiogroup keys, nav-link focus handoff): 30 checks pass. Browser-verified at 305px: menu focus, Escape, both fragment links and the phone link. No horizontal overflow at 305/360/753px; reduced-motion emulation disables transitions.
+
+## Runtime tests — 17 November 2026
+Added two dependency-free DOM harnesses. `tests/behavior.test.js` runs `app.js` and exercises the visit-note form: date limits from the shared clock, honeypot short-circuit, Sunday rejection with error association, weekday note content and result focus, Saturday and past-time validation, and clearing stale output on edit. `tests/interaction.test.js` runs `experience.js` and covers initial radiogroup state, click selection, Arrow/Home/End keys with focus movement, and ignoring unrelated keys. Run everything with `node --test tests/*.test.js` (30 static checks plus 9 runtime tests, all passing). Temporary mutations — changing the Sunday guard, and disabling the arrow-key handler — made the relevant tests fail, then restoring each file returned the suite to green, so the harnesses catch real regressions. Clocks are fixed stubs; no live date, business fact or launch setting changed.
