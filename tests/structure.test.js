@@ -148,6 +148,7 @@ check('not-found page keeps the site style and a safe fallback', () => {
   assert.match(notFound, /<h1>Page not found<\/h1>/);
   assert.ok(notFound.includes('href="./"'));
   assert.ok(notFound.includes('href="site.css"'));
+  assert.ok(notFound.includes('href="refinement.css"') && notFound.includes('href="finishing.css"'));
   assert.ok(notFound.includes('name="robots" content="noindex, nofollow"'));
   assert.ok(notFound.includes("script-src 'self'"));
   assert.ok(notFound.includes('tel:+442920763442'));
@@ -163,6 +164,17 @@ check('structured data matches visible hours and service names', () => {
   const names = salon.hasOfferCatalog.itemListElement.map(i => i.itemOffered.name);
   assert.equal(names.length, 4);
   for (const n of names) assert.ok(html.includes(n), 'service name absent from page: ' + n);
+});
+
+check('validation hour tables agree with structured data and copy', () => {
+  const app = read('app.js'), exp = read('experience.js');
+  // 09:00-17:00 weekdays (540-1020) and 09:00-13:00 Saturday (540-780).
+  assert.ok(app.includes('[540,780]:[540,1020]'), 'app.js open-time table changed');
+  assert.ok(exp.includes('{1:[540,1020],2:[540,1020],3:[540,1020],4:[540,1020],5:[540,1020],6:[540,780]}'), 'experience.js hours table changed');
+  const salon = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(m => JSON.parse(m[1])).find(b => b['@type'] === 'HairSalon');
+  const windows = salon.openingHoursSpecification.map(x => [x.opens, x.closes]);
+  assert.deepEqual(windows, [['09:00', '17:00'], ['09:00', '13:00']]);
 });
 
 check('service links have distinct accessible names', () => {
