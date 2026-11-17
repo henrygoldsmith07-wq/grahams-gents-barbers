@@ -166,6 +166,14 @@ check('structured data matches visible hours and service names', () => {
   for (const n of names) assert.ok(html.includes(n), 'service name absent from page: ' + n);
 });
 
+check('social image metadata has full Open Graph and Twitter parity', () => {
+  const meta = name => (html.match(new RegExp('<meta (?:property|name)="' + name + '" content="([^"]+)"')) || [])[1];
+  assert.equal(meta('og:image'), meta('twitter:image'));
+  assert.equal(meta('og:image:alt'), meta('twitter:image:alt'));
+  assert.equal(meta('twitter:card'), 'summary_large_image');
+  assert.ok(meta('twitter:image'));
+});
+
 check('validation hour tables agree with structured data and copy', () => {
   const app = read('app.js'), exp = read('experience.js');
   // 09:00-17:00 weekdays (540-1020) and 09:00-13:00 Saturday (540-780).

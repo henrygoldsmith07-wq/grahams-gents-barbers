@@ -79,3 +79,6 @@ The security audit found no remaining concrete weakness. Contract suite grew to 
 
 ## Browser verification — 17 November 2026
 Lighthouse on the local build scored 1.0 accessibility, 1.0 best practices and 1.0 SEO with zero failures. Real IntersectionObserver callbacks confirmed the nav highlight: top → none, `#visit` in view → `#visit`, `#services` in view → `#services`, back to top → none. At a 215px viewport the form column caused 13px of horizontal overflow; the ≤360px rule now constrains the grid track with `minmax(0,1fr)` and reduces form padding, and the document no longer overflows. The service-link accessible names now include their visible "Ask about this" text, satisfying axe's label-content-name rule. The test suite has 27 checks. Browser verification: menu focus "Services", error shown/described/cleared, copy failure selects the note and keeps the button label stable, 404 accent `#65532f`. A 134-element before/after computed-style comparison found exactly one intentional difference — the newly selected initial service row.
+
+## Social metadata parity — 17 November 2026
+Added explicit `twitter:image` and `twitter:image:alt` matching the Open Graph values, completing the card parity declared by `twitter:card`. The contract suite now has 28 checks and asserts that parity.
